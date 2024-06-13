@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Image Example</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+
+<img id="random-image" alt="Random">
+
+<script>
+  const unsplashAccessKey = 'a2AiO9K1Zbsvn1KGp7JH7X8NCK0KGVZOdCBo2JEP6ok';
+  const query = 'Cakes & pastry'; // Change this to the specific item you want images of
+  const imgElement = document.getElementById('random-image');
+
+  async function fetchRandomImage() {
+    try {
+      const response = await fetch(`https://api.unsplash.com/photos/random?query=${query}&client_id=${unsplashAccessKey}`);
+      const data = await response.json();
+      imgElement.src = data.urls.regular;
+    } catch (error) {
+      console.error('Error fetching random image:', error);
+    }
+  }
+
+  window.onload = fetchRandomImage;
+</script>
+
+</body>
+</html>
